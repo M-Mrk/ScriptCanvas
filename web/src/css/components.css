@@ -364,8 +364,8 @@ input[type="number"]:focus {
   width: 100% !important;
 }
 
-/* INFO: Help box */
-.help-box {
+/* INFO: tip box */
+.tip-box {
   display: none;
   position: absolute;
   right: var(--space-sm);
@@ -373,24 +373,24 @@ input[type="number"]:focus {
   z-index: 4;
 }
 
-.help-box.shown {
+.tip-box.shown {
   display: block;
 }
 
-.help-box.disabled {
+.tip-box.disabled {
   display: none !important;
 }
 
-.help-inner {
+.tip-inner {
   position: relative;
   background-color: var(--bg-0);
   padding: var(--space-md);
-  outline: 3px dotted var(--help);
+  outline: 3px dotted var(--tip);
   outline-offset: calc(var(--space-md)/2*-1);
   color: var(--text);
 }
 
-.help-top {
+.tip-top {
   position: absolute;
   top: 0;
   left: var(--space-md);
@@ -398,25 +398,25 @@ input[type="number"]:focus {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: var(--help);
+  color: var(--tip);
 }
 
-.help-top * {
+.tip-top * {
   background-color: var(--bg-0);
   padding: 0 var(--space-xs) 0 var(--space-xs);
 }
 
-.help-close-btn {
+.tip-close-btn {
   font-size: var(--font-size-md);
   cursor: pointer;
   transition: background var(--transition-fast);
 }
 
-.help-close-btn:hover {
-  background-color: var(--help-hover);
+.tip-close-btn:hover {
+  background-color: var(--tip-hover);
 }
 
-.help-content {
+.tip-content {
   margin-top: var(--space-xs);
   max-width: 25vw;
   max-height: 10vh;

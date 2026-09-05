@@ -99,79 +99,9 @@ export const hide_error = () => {
   error_pop.classList.remove('shown');
 }
 
-/* INFO: Help box */
-const help_box = get_element<HTMLDivElement>('#help-box');
-const help_close = get_element<HTMLDivElement>('#help-close-btn');
-const help_content = get_element('#help-content');
-const help_show_delay = 2000;
-const help_hide_delay = 1500;
-const hide_help = () => {
-  help_box.classList.remove('shown');
-}
-
-const show_help = (text: string) => {
-  help_content.innerText = text;
-  help_box.classList.add('shown');
-}
-
-const on_help_element = (element: HTMLElement, help: string) => {
-  setTimeout(() => {
-    if (!element.matches(':hover')) {
-      return;
-    }
-    show_help(help);
-
-    let handling_leave = false;
-    const leave_handler: (() => void) = () => {
-      if (handling_leave) {
-        return;
-      }
-      handling_leave = true;
-
-      setTimeout(() => {
-        handling_leave = false;
-        if (element.matches(':hover') || help_box.matches(':hover')) {
-          // cursor still above help related element
-          return;
-        }
-
-        element.removeEventListener('mouseleave', leave_handler);
-        help_box.removeEventListener('mouseleave', leave_handler);
-        hide_help();
-      }, help_hide_delay);
-    }
-    element.addEventListener('mouseleave', leave_handler);
-    help_box.addEventListener('mouseleave', leave_handler);
-  }, help_show_delay);
-};
-
-const init_help = () => {
-  help_close.addEventListener('click', hide_help);
-
-  document.addEventListener('mouseover', (event) => {
-    const target = event.target;
-    if (!target || !(target instanceof HTMLElement)) {
-      console.debug("dropping because not an HTML Element");
-      return;
-    }
-    let help;
-    help = target.getAttribute('data-help');
-    if (!help) {
-      help = target.parentElement?.getAttribute('data-help'); // used for label elements
-      if (!help) {
-        return;
-      }
-    }
-
-    on_help_element(target, help);
-  });
-};
-
-
 export const init_ui = () => {
   init_selects();
   init_error();
-  init_help();
 
   // seperate files
   init_console();

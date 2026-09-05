@@ -5,7 +5,7 @@ import { get_select_value, set_select_value } from "./ui";
 
 const main_container = get_element<HTMLDivElement>('#top-settings');
 const hot_reload_check = get_element<HTMLInputElement>('#setting-hot-reload');
-const disable_help_check = get_element<HTMLInputElement>('#setting-disable-help');
+const disable_tip_check = get_element<HTMLInputElement>('#setting-disable-tip');
 
 export const init_settings = () => {
   const state = get_state();
@@ -13,7 +13,7 @@ export const init_settings = () => {
   set_select_value('#setting-output-type', state.output_type);
 
   hot_reload_check.checked = state.hot_reload;
-  disable_help_check.checked = state.disable_help;
+  disable_tip_check.checked = state.disable_tip;
 
   main_container.addEventListener('input', () => { load_from_page() });
 };
@@ -24,7 +24,7 @@ const load_from_page = () => {
   state.language = get_select_value('#setting-language') as Language;
   state.output_type = get_select_value('#setting-output-type') as OutputType;
   state.hot_reload = hot_reload_check.checked;
-  state.disable_help = disable_help_check.checked;
+  state.disable_tip = disable_tip_check.checked;
 
   update_state(state);
 };

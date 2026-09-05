@@ -7,9 +7,12 @@ import { init_editor } from "./editor";
 import { init_controls } from "./interaction";
 import { init_settings } from "./settings";
 import { init_ui } from "./ui";
+import { init_help } from './help';
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   init_ui();
+  init_help();
   init_state();
   init_editor();
   init_workers();

@@ -60,23 +60,23 @@ const add_settings = () => {
   const settings_html = html`
     <label class="input-wrapper">
       Resolution:
-      <label class="number" data-help="Sets the width of the output, so the x resolution"> 
+      <label class="number" data-tip="Sets the width of the output, so the x resolution"> 
         <input type="number" name="Resolution width" value="${settings.res_x}" min="1" step="1" id="${id_res_x.slice(1)}">
       </label>
         x
-      <label class="number" data-help="Sets the height of the output, so the y resolution.">
+      <label class="number" data-tip="Sets the height of the output, so the y resolution.">
       <input type="number" name="Resolution height" value="${settings.res_y}" min="1" step="1" id="${id_res_y.slice(1)}">
       </label>
     </label>
-    <label class="checkbox" data-help="Will clamp output values larger than 255 to 255">
+    <label class="checkbox" data-tip="Will clamp output values larger than 255 to 255">
       <input type="checkbox" name="Auto clamp output" id="${id_clamp.slice(1)}">
       <span>Auto clamp output</span>
     </label>
-    <label class="checkbox" data-help="Enables the browsers image smoothing, so results may vary. Works best for medium resoultions and gradients.">
+    <label class="checkbox" data-tip="Enables the browsers image smoothing, so results may vary. Works best for medium resoultions and gradients.">
       <input type="checkbox" name="Blur" id="${id_blur.slice(1)}">
       <span>Blur</span>
     </label>
-    <label class="checkbox" data-help="Make output always a square by stretching pixels.">
+    <label class="checkbox" data-tip="Make output always a square by stretching pixels.">
       <input type="checkbox" name="Square output" id="${id_square.slice(1)}">
       <span>Square Output</span>
     </label>
