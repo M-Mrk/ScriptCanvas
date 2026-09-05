@@ -34,7 +34,7 @@
             <input type="checkbox" name="hot-reload" id="setting-hot-reload">
             <span>Hot reload</span>
           </label>
-          <label class="checkbox" data-tip="Disables this box.">
+          <label class="checkbox" data-tip="Disables the automatic tip box">
             <input type="checkbox" name="disable-tip" id="setting-disable-tip">
             <span>Disable tips</span>
           </label>
@@ -74,17 +74,25 @@
       </div>
     </div>
 
+    <div class="help-modal" id="help-modal">
+      <div class="help-inner">
+        <span class="help-top">
+          <span>Help</span>
+          <span class="help-close-btn" id="help-close-btn">X</span>
+        </span>
+        <div class="help-content" id="help-content">
+          <button id="help-show-tip-btn">Show specific tip</button>
+        </div>
+      </div>
+    </div>
+
     <div class="tip-box" id="tip-box">
       <div class="tip-inner">
         <span class="tip-top">
           <span>Tip</span>
           <span class="tip-close-btn" id="tip-close-btn">X</span>
         </span>
-        <div class="tip-content" id="tip-content">Content here. Wow this is alot of content. I am really writing a lot
-          here. Actually this is an insane amount of tip here. I think there might be some other problems if I am
-          writing so much. Well okay now this is getting exhausting and hopefully enough. Okay wow still not enough to
-          cause anyoverflowing, maybe I should instead use the responsive design testing feature instead of adding this
-          much content here</div>
+        <div class="tip-content" id="tip-content"></div>
       </div>
     </div>
 

@@ -15,6 +15,9 @@
   --tip: #e69129;
   --tip-hover: color-mix(in oklch, var(--tip) 70%, black);
 
+  --help: #d18b52;
+  --tip-hover: color-mix(in oklch, var(--help) 70%, black);
+
   /* --editor-bg: #1e1e1e; */
   /* --editor-text: white; */
   --editor-error-highlight: color-mix(in srgb, color-mix(in oklch, #1e1e1e 20%, #ff0000) 50%, transparent);

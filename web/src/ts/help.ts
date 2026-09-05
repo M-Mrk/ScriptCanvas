@@ -68,6 +68,66 @@ const init_tip = () => {
   });
 };
 
+/* INFO: Help modal */
+const modal_box = get_element<HTMLDivElement>('#help-modal');
+const modal_close = get_element<HTMLDivElement>('#help-close-btn');
+const modal_content = get_element('#help-content');
+const question_button = get_element<HTMLButtonElement>('#help-btn');
+
+const show_tip_button = get_element('#help-show-tip-btn');
+
+const click_handler = (event: PointerEvent) => {
+  event.preventDefault();
+  let target = event.target;
+  if (!target || !(target instanceof HTMLElement)) {
+    console.debug("dropping because not an HTML Element");
+    return;
+  }
+  let tip;
+  tip = target.getAttribute('data-tip');
+  if (!tip) {
+    tip = target.parentElement?.getAttribute('data-tip'); // used for label elements
+    if (!tip) {
+      modal_content.innerText = "There is no tip available for that element. Try again or click on another element";
+      return;
+    }
+  }
+  modal_content.innerText = "Tip: " + tip;
+};
+
+const show_tip_handler = () => {
+  modal_content.innerText = "Now click on the element, whose tip you want to see."
+
+  // click debounce
+  setTimeout(() => {
+    document.addEventListener('click', click_handler);
+  }, 250);
+}
+
+const toggle_modal = () => {
+  if (modal_box.classList.contains('shown')) {
+    // remove listeners
+    console.debug("removing listeners");
+    document.removeEventListener('click', click_handler);
+  } else {
+    // restore original state
+    console.debug("restoring modal");
+    modal_content.addEventListener("DOMContentLoaded", () => {
+      modal_content.innerHTML = initial_html;
+    });
+  }
+  modal_box.classList.toggle('shown');
+}
+
+const initial_html = modal_content.innerHTML;
+const init_modal = () => {
+  modal_close.addEventListener('click', toggle_modal);
+  question_button.addEventListener('click', toggle_modal);
+
+  show_tip_button.addEventListener('click', show_tip_handler);
+}
+
 export const init_help = () => {
   init_tip();
+  init_modal();
 }
