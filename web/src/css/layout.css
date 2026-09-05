@@ -81,6 +81,7 @@ body {
   grid-template-columns: 1fr;
   grid-template-rows: 0.1fr 1fr;
   gap: 0px 0px;
+  min-width: 0;
 }
 
 .output-toolbar {
@@ -92,6 +93,8 @@ body {
   background-color: var(--bg-3);
   padding-left: 12px;
   padding-right: 12px;
+  overflow-y: auto;
+  min-width: 0;
 }
 
 .output-inner {
@@ -101,4 +104,5 @@ body {
   background-color: var(--bg-2);
   padding: var(--space-md) var(--space-md) var(--space-lg) var(--space-xl);
   overflow: hidden;
+  min-width: 0;
 }

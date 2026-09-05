@@ -56,7 +56,7 @@ const tabbar_switch_output = () => {
 };
 
 const init_tabbar = () => {
-  tabbar_switch_code();
+  tabbar_switch_output();
   tabbar.addEventListener('click', (event) => {
     const target = event.target;
     if (!target || !(target instanceof HTMLElement)) {

@@ -9,7 +9,6 @@ declare const monaco: typeof Monaco;
 
 let editor_global: Monaco.editor.IStandaloneCodeEditor | undefined;
 
-const parent_container = get_element<HTMLDivElement>('#in-out-container');
 const editor_container = get_element<HTMLDivElement>('#editor-container');
 
 export const get_editor = (): Monaco.editor.IStandaloneCodeEditor => {
@@ -77,7 +76,7 @@ export const init_editor = () => {
     });
 
     editor_global.onDidChangeModelContent(content_changed);
-    resizing_observer.observe(parent_container);
+    resizing_observer.observe(document.documentElement);
     editor_global.layout();
   });
 }
