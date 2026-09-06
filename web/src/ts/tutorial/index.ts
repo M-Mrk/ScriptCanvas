@@ -1,77 +1,12 @@
-import { get_element } from "./common"
+import { get_element } from "../common"
+import { get_editor } from "../editor";
+import { run_pipeline } from "../interaction";
+import { grid_add_settings } from "../outputs/grid/lifecycle";
+import { init_settings } from "../settings";
+import { get_output, get_state, update_state } from "../state";
+import { AppState, Language, OutputType } from "../types";
 
-enum BoxPosition {
-  Top = "top",
-  Right = "right",
-  Bottom = "bottom",
-  Left = "left",
-  Center = "center",
-}
-
-interface TutorialStep {
-  target: string,
-  text: string,
-  box: BoxPosition,
-}
-const steps: TutorialStep[] = [
-  {
-    target: "#tutorial-box",
-    text: "Hi! Welcome to PixelMatrix. An app made to experiment with logic and use unique output types. The core idea is to run a script multiple times with a different scope to create an output. It is inspired by the game replicube. Lets go over the basics to create a output.",
-    box: BoxPosition.Center,
-  },
-  {
-    target: "#editor-container",
-    text: `The default output is Grid, meaning that the script is evaluated over a grid of pixels and it returns the RGB value of that Pixel. The script has access to the pixels x and y coordinates, aswell as the resolution.
-
-    So a script just returning "[255, 255, 255]" would result in a white grid`,
-    box: BoxPosition.Center,
-  },
-  {
-    target: "#editor-container",
-    text: "This is the editor. In here you write your script. You get access to all sorts of stuff from the output. For example Grid exposes which coordinate the script is on and the resolution and it expects a return of the pixels RGB value. It also uses the monaco editor, which you might know from VSCode and so it uses the same keybinds.",
-    box: BoxPosition.Right,
-  },
-  {
-    target: "#output-container",
-    text: "This is the output. There you can see the result of your script.",
-    box: BoxPosition.Left,
-  },
-  {
-    target: "#run-btn",
-    text: "Press here to run your script",
-    box: BoxPosition.Bottom,
-  },
-  {
-    target: "#middle-icon",
-    text: "Or here",
-    box: BoxPosition.Bottom,
-  },
-  {
-    target: "#top-settings",
-    text: "Here you can switch what language and output to use (More coming soon!). By default it uses Rhai, a scripting language related to JavaScript and Rust, and outputs as a grid, meaning that your script gets run over each pixel in a grid and returns that pixels RGB value. So a script just returning '[255, 255, 255]' would create a white image.",
-    box: BoxPosition.Bottom,
-  },
-  {
-    target: "#output-toolbar",
-    text: "Here are some settings to tweak the output.",
-    box: BoxPosition.Left,
-  },
-  {
-    target: "#console",
-    text: "If you're ever stuck on something you can use debug and print statements in your script and they will be shown here. For rhai those are 'print()' and 'debug()'.",
-    box: BoxPosition.Top,
-  },
-  {
-    target: "#help-btn",
-    text: "In here you can look up functions and exposed variables for your script, show tool tips and revisit this tutorial.",
-    box: BoxPosition.Center,
-  },
-  {
-    target: "#tutorial-box",
-    text: "Thats all for now! Now go ahead and write some logic and see how it results into an image.",
-    box: BoxPosition.Center,
-  }
-]
+import { BoxPosition, TutorialStep, steps } from "./steps";
 
 interface Position {
   top: number,
@@ -156,6 +91,14 @@ const show_box = (step: TutorialStep) => {
 }
 
 const show_step = (step: TutorialStep) => {
+  if (step.script) {
+    get_editor().setValue(step.script);
+  }
+
+  if (step.run_script) {
+    run_pipeline();
+  }
+
   show_box(step);
   setTimeout(() => {
     show_border(step.target);
@@ -186,6 +129,44 @@ const new_step = (change: number) => {
   show_step(steps[current_step] as TutorialStep);
 }
 
+let script_before: string | null = null;
+let grid_settings_before: string | null = null;
+let app_state_before: AppState | null = null;
+let tutorial_active = false;
+export const start_tutorial = () => {
+  if (tutorial_active) {
+    return;
+  }
+  tutorial_active = true;
+  // store script
+  script_before = get_editor().getValue();
+
+  get_output().clear();
+
+  current_step = 0;
+  // No tutorial implemented for smaller screens using tab layout
+  if (800 >= window.innerWidth) {
+    end_tutorial();
+  }
+
+  // store current app state and load demo one
+  app_state_before = get_state();
+  update_state({
+    output_type: OutputType.GRID,
+    language: Language.RHAI,
+    hot_reload: false,
+    disable_tip: false,
+  })
+  init_settings();
+
+  // store current grid settins and load demo ones
+  grid_settings_before = window.localStorage.getItem('grid-settings');
+  window.localStorage.setItem('grid-settings', '{"res_x":32,"res_y":32,"clamp":true,"blur":false,"square":false}');
+  grid_add_settings();
+
+  show_step(steps[current_step] as TutorialStep)
+};
+
 const end_tutorial = () => {
   const ov_container = get_element('#tutorial-overlay-container');
   ov_container.classList.remove('shown');
@@ -197,21 +178,31 @@ const end_tutorial = () => {
   box.classList.remove('shown');
 
   window.localStorage.setItem('tutorial-done', 'true');
-};
 
-export const start_tutorial = () => {
-  current_step = 0;
-  // No tutorial implemented for smaller screens using tab layout
-  if (800 >= window.innerWidth) {
-    end_tutorial();
+  // restore script
+  if (script_before) {
+    const editor = get_editor();
+    editor.setValue(script_before);
   }
 
-  show_step(steps[current_step] as TutorialStep)
+  // restore app state
+  if (app_state_before) {
+    update_state(app_state_before);
+    init_settings();
+  }
+
+  // restore grid settings
+  if (grid_settings_before) {
+    window.localStorage.setItem('grid-settings', grid_settings_before);
+    grid_add_settings();
+  }
+
+  tutorial_active = false;
 };
 
 export const init_tutorial = () => {
   const target_observer = new ResizeObserver(() => {
-    if (last_target) {
+    if (tutorial_active && last_target) {
       show_border(last_target);
       show_overlay(last_target);
     }
@@ -225,5 +216,4 @@ export const init_tutorial = () => {
   if (window.localStorage.getItem('tutorial-done') != 'true') {
     start_tutorial();
   }
-  // TODO: Trigger on first visit and then not again and add show tutorial button to '?' menu!
 }

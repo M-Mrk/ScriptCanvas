@@ -51,7 +51,7 @@ const update_settings_from_page = () => {
   window.localStorage.setItem('grid-settings', JSON.stringify(settings));
 };
 
-const add_settings = () => {
+export const grid_add_settings = () => {
   const saved_settings = window.localStorage.getItem('grid-settings');
   if (saved_settings) {
     settings = JSON.parse(saved_settings);
@@ -117,7 +117,7 @@ const add_output = () => {
 }
 
 export const init = () => {
-  add_settings();
+  grid_add_settings();
   add_output();
 };
 

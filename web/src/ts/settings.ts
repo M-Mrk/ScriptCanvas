@@ -15,7 +15,7 @@ export const init_settings = () => {
   hot_reload_check.checked = state.hot_reload;
   disable_tip_check.checked = state.disable_tip;
 
-  main_container.addEventListener('input', () => { load_from_page() });
+  main_container.addEventListener('input', load_from_page);
 };
 
 const load_from_page = () => {
