@@ -8,6 +8,7 @@ import { init_controls } from "./interaction";
 import { init_settings } from "./settings";
 import { init_ui } from "./ui";
 import { init_help } from './help';
+import { init_tutorial } from './tutorial';
 
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -19,4 +20,5 @@ document.addEventListener('DOMContentLoaded', async () => {
   await wasm_init();
   init_controls();
   init_settings();
+  init_tutorial();
 });

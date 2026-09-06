@@ -1,0 +1,54 @@
+@keyframes border-blink {
+
+  0%,
+  100% {
+    outline: var(--space-sm) solid #ff000042;
+  }
+
+  50% {
+    outline: var(--space-sm) solid #ff000068;
+  }
+}
+
+.tutorial-border {
+  display: none;
+  position: fixed;
+  box-sizing: border-box;
+  outline: var(--space-sm) solid #ff000042;
+  outline-offset: calc(var(--space-sm)*-1);
+  animation: border-blink 1s ease infinite;
+  z-index: 50;
+
+  transition:
+    left var(--transition-fast),
+    top var(--transition-fast),
+    height var(--transition-fast),
+    width var(--transition-fast);
+}
+
+.tutorial-border.shown {
+  display: block;
+}
+
+.tutorial-overlay-container {
+  display: none;
+}
+
+.tutorial-overlay-container.shown {
+  display: block;
+}
+
+.tutorial-overlay {
+  position: fixed;
+  z-index: 45;
+  background-color: #00000088;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  transition:
+    top var(--transition-fast),
+    right var(--transition-fast),
+    bottom var(--transition-fast),
+    left var(--transition-fast);
+}
