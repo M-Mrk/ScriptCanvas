@@ -52,3 +52,49 @@
     bottom var(--transition-fast),
     left var(--transition-fast);
 }
+
+.tutorial-box {
+  display: none;
+  position: fixed;
+  z-index: 55;
+  background-color: mediumslateblue;
+  transition:
+    top var(--transition-fast),
+    right var(--transition-fast),
+    left var(--transition-fast),
+    width var(--transition-fast),
+    height var(--transition-fast);
+  max-width: 25vw;
+}
+
+.tutorial-box.shown {
+  display: block;
+}
+
+.tutorial-box.top {
+  top: var(--space-md);
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+
+.tutorial-box.right {
+  top: 50%;
+  left: auto;
+  right: var(--space-md);
+  transform: translateY(-50%);
+}
+
+.tutorial-box.bottom {
+  top: calc(100% - var(--space-md));
+  left: 50%;
+  right: auto;
+  transform: translate(-50%, -100%);
+}
+
+.tutorial-box.left {
+  left: var(--space-md);
+  top: 50%;
+  right: auto;
+  transform: translateY(-50%);
+}
