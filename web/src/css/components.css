@@ -15,7 +15,9 @@ button {
   color: var(--input);
   background-color: inherit;
   cursor: pointer;
-  transition: background-color var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
   white-space: nowrap;
   text-wrap: nowrap;
 }
@@ -77,6 +79,7 @@ button:hover {
 
 .loading {
   cursor: wait !important;
+  pointer-events: none;
   transition: background-color var(--transition-fast);
 }
 
@@ -87,6 +90,12 @@ button:hover {
 .loading::before {
   content: "⠋ ";
   animation: tui-spinner 1s infinite step-start;
+}
+
+button.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  color: var(--input-disabled);
 }
 
 /* INFO: Checkbox */

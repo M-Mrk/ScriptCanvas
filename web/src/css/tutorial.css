@@ -64,7 +64,6 @@
     left var(--transition-fast),
     width var(--transition-fast),
     height var(--transition-fast);
-  max-width: 25vw;
 }
 
 .tutorial-box.shown {
@@ -97,4 +96,60 @@
   top: 50%;
   right: auto;
   transform: translateY(-50%);
+}
+
+.tutorial-box.center {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tutorial-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-0);
+  padding: var(--space-md);
+  outline: 3px dotted var(--tip);
+  outline-offset: calc(var(--space-md)/2*-1);
+  color: var(--text);
+
+}
+
+.tutorial-top {
+  position: absolute;
+  top: 0;
+  left: var(--space-md);
+  right: var(--space-sm);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: var(--tip);
+}
+
+.tutorial-top * {
+  background-color: var(--bg-0);
+  padding: 0 var(--space-xs) 0 var(--space-xs);
+}
+
+.tutorial-close-btn {
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.tutorial-close-btn:hover {
+  background-color: var(--tip-hover);
+}
+
+.tutorial-content {
+  margin-top: var(--space-xs);
+  width: 25vw;
+  overflow-y: auto;
+}
+
+.tutorial-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

@@ -1,4 +1,5 @@
 import { get_element } from "./common";
+import { start_tutorial } from "./tutorial";
 
 /* INFO: tip box */
 const tip_box = get_element<HTMLDivElement>('#tip-box');
@@ -75,6 +76,7 @@ const modal_content = get_element('#help-content');
 const question_button = get_element<HTMLButtonElement>('#help-btn');
 
 const show_tip_button = get_element('#help-show-tip-btn');
+const show_tutorial_button = get_element('#help-show-tutorial-btn');
 
 const click_handler = (event: PointerEvent) => {
   event.preventDefault();
@@ -125,6 +127,10 @@ const init_modal = () => {
   question_button.addEventListener('click', toggle_modal);
 
   show_tip_button.addEventListener('click', show_tip_handler);
+  show_tutorial_button.addEventListener('click', () => {
+    toggle_modal();
+    start_tutorial();
+  });
 }
 
 export const init_help = () => {
