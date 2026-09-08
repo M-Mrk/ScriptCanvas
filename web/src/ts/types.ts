@@ -17,11 +17,30 @@ export const Language = {
 } as const;
 export type Language = typeof Language[keyof typeof Language];
 
+export interface VariableDoc {
+  name: string,
+  doc: string,
+}
+
+export interface OutputDoc {
+  name: string,
+  summary: string,
+  variables: VariableDoc[],
+}
+
+export interface FunctionDoc {
+  name: string,
+  parameters: [string, string][],
+  output: string,
+  doc: string,
+}
+
 export interface Output {
   pipeline(script: string): Promise<ErrorOutput | null>,
   clear(): void,
   init(): void,
   deinit(): void,
+  docs: OutputDoc,
 };
 
 export type OutputSetting = GridSettings; // Add new settings here

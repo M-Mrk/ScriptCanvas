@@ -6,7 +6,7 @@ const app_state: AppState = {
   language: Language.RHAI,
   hot_reload: false,
   disable_tip: false,
-}
+};
 
 export const get_state = () => app_state;
 
@@ -24,11 +24,11 @@ export const update_state = (new_state: AppState) => {
   }
 
   window.localStorage.setItem("app-state", JSON.stringify(app_state));
-}
+};
 
 export const get_output = () => {
   return match_output(app_state.output_type);
-}
+};
 
 const match_output = (output_type: OutputType): Output => {
   switch (output_type) {
@@ -38,7 +38,7 @@ const match_output = (output_type: OutputType): Output => {
     default:
       throw new Error(`Couldn't get Output interface from output_type of ${output_type}`);
   }
-}
+};
 
 export const init_state = () => {
   const saved = window.localStorage.getItem("app-state");
