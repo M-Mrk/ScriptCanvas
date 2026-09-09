@@ -16,9 +16,10 @@ export interface TutorialStep {
 export const steps: TutorialStep[] = [
   {
     target: "#tutorial-box",
-    text: `Hi! Welcome to PixelMatrix. An app made to experiment with logic and use unique output types. The core idea is to run a script multiple times with different inputs to create an output. It's inspired by the game replicube.
+    text: `Hi! Welcome to PixelMatrix. An app made for experimenting with logic and using unique output types. 
+    The core idea is to run a script multiple times with different inputs to create an output. It's inspired by the game replicube.
 
-    Lets go over the basics to create an output.`,
+    Let's go over the basics so you can create an output.`,
     box: BoxPosition.Center,
   },
   {
@@ -39,7 +40,7 @@ export const steps: TutorialStep[] = [
   },
   {
     target: "#output-container",
-    text: "This is the output. There you can see the result of the script and isn't that a lovely color? But this is a bit boring...",
+    text: "This is the output. Here you can see the result of the script and isn't that a lovely color? But this is a bit boring...",
     box: BoxPosition.Left,
     run_script: true,
   },
@@ -48,8 +49,8 @@ export const steps: TutorialStep[] = [
     text: `
     So lets add something important. Let us use the pixels coordinates in relation to the output!
 
-    This script runs seperatly for each pixel, so 'x' and 'y' have different values on each pixel. 
-    It takes the same color as before but makes it more green along the x-axis and more blue along the y-axis.
+    This script runs seperatly for each pixel, so 'x' and 'y' have different values on each pixel.
+    It takes the same color as before but adds more green along the x-axis and more blue along the y-axis.
     We also multiply this change by 2 to make it more noticeable.
     Also because this is a real programming language we can also use variables and functions to help us.
     `,
@@ -131,7 +132,7 @@ export const steps: TutorialStep[] = [
 
   {
     target: "#help-btn",
-    text: "In here you can look up functions and exposed variables for your script, show tool tips and revisit this tutorial.",
+    text: "In here you can look up functions and exposed variables for your script and revisit this tutorial.",
     box: BoxPosition.Center,
   },
   {
