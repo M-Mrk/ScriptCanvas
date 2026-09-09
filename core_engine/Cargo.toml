@@ -10,10 +10,15 @@ crate-type = ["cdylib"]
 [dependencies]
 console_log = { version = "1.1.0", features = ["wasm-bindgen"] }
 getrandom = { version = "0.4.3", features = ["wasm_js"] }
+
+# Make sure rhai-sci dependencies also use getrandom with wasm_js flag
+getrandom_v3 = { package = "getrandom", version = "0.3.4", features = ["wasm_js"] }
+
 log = "0.4.33"
 log-panics = "2.1.0"
 rand = "0.10.2"
 rhai = { version = "1.25.1", default-features = false, features = ["std"] }
+rhai-sci = { version = "0.3.0", default-features = false }
 serde = { version = "1.0.229", features = ["derive"] }
 serde-wasm-bindgen = "0.6.5"
 tsify = { version = "0.5.6", default-features = false, features = ["js"] }

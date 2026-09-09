@@ -169,7 +169,7 @@ const show_language_docs = () => {
   doc_container.className = "help-function-docs";
 
   const disclaimer = document.createElement('div');
-  disclaimer.innerText = "Here listed are only extra functions, built-in functions and those of the math package are also supported";
+  disclaimer.innerText = "Here listed are only extra functions, built-in functions and those of the math and sci package are also supported. Do note that some functions only take in floats and might not be recognized if used with integers  (e.g. sin(12) does not work while sin(12.0) does).";
   disclaimer.className = "help-summary";
 
   const rhai_docs: FunctionDoc[] = [

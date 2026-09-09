@@ -1,4 +1,6 @@
+use rhai::packages::{BasicMathPackage, Package};
 use rhai::{AST, Engine, ParseError, Scope};
+use rhai_sci::SciPackage;
 use std::sync::{Arc, Mutex};
 
 use super::types::{GridSettings, Pixel};
@@ -18,6 +20,13 @@ fn create_log(x: i32, y: i32, user_msg: &str) -> LogMessage {
 pub fn create_engine() -> Engine {
     let mut engine = Engine::new();
     engine.register_fn("rand", rand);
+
+    let sci = SciPackage::new();
+    sci.register_into_engine(&mut engine);
+
+    let math = BasicMathPackage::new();
+    math.register_into_engine(&mut engine);
+
     engine
 }
 
@@ -112,10 +121,12 @@ pub fn run_rhai(
     for val in raw_script_color {
         if let Some(int_val) = val.clone().try_cast::<i64>() {
             script_color.push(int_val);
+        } else if let Some(float_val) = val.clone().try_cast::<f64>() {
+            script_color.push(float_val as i64);
         } else {
             return Err(ErrorOutput::new(
                 format!(
-                    "Bad return! Array elements must all be integers. Bad type was '{}'",
+                    "Bad return! Array elements must all be 64 bit integers (or 64 bit floats which get rounded). Bad type was '{}'",
                     val.type_name()
                 ),
                 None,
