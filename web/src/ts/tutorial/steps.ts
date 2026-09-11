@@ -34,9 +34,9 @@ export const steps: TutorialStep[] = [
     text: `So lets try that now with this simple script. By default the script uses the Rhai language, a scripting language with syntax similar to JavaScript and Rust.
     It returns "[236, 55, 80]" on every pixel, meaning every pixel is set to that color.`,
     box: BoxPosition.Right,
-    script: `//
-    // This script always returns the same color
-    return [236, 55, 80]`,
+    script: `
+// This script always returns the same color
+return [236, 55, 80]`,
   },
   {
     target: "#output-container",
@@ -56,12 +56,10 @@ export const steps: TutorialStep[] = [
     `,
     box: BoxPosition.Top,
     script: `
-    //
-    // 
-    let r = 236;
-    let g = 55 + ( x * 2 );
-    let b = 80 + ( y * 2 );
-    return [r, g, b];
+let r = 236;
+let g = 55 + ( x * 2 );
+let b = 80 + ( y * 2 );
+return [r, g, b];
     `,
     run_script: true,
   },
@@ -73,34 +71,33 @@ export const steps: TutorialStep[] = [
     `,
     box: BoxPosition.Top,
     script: `
-    //
-    let h_color = [255, 255, 255];
-    let bgr_color = [236, 55, 88];
+let h_color = [255, 255, 255];
+let bgr_color = [236, 55, 88];
 
-    // add a margin to the h
-    // using classic logic. '||' means OR and '&&' means AND 
-    if y < 5 || y > 27 {
-      return bgr_color;
-    }
+// add a margin to the h
+// using classic logic. '||' means OR and '&&' means AND 
+if y < 5 || y > 27 {
+return bgr_color;
+}
 
-    // left leg of h
-    if 3 < x && x < 10 {
-      return h_color;
-    }
+// left leg of h
+if 3 < x && x < 10 {
+return h_color;
+}
 
-    // right leg of h
-    if 22 < x && x < 29 && y > 12 {
-      return h_color;
-    }
+// right leg of h
+if 22 < x && x < 29 && y > 12 {
+return h_color;
+}
 
-    // middle of h
-    // using rhai's in range
-    if (x in 10..23) && (y in 13..18) {
-      return h_color;
-    }
+// middle of h
+// using rhai's in range
+if (x in 10..23) && (y in 13..18) {
+return h_color;
+}
 
-    // fill remaingin pixels with background color
-    return bgr_color;`,
+// fill remaingin pixels with background color
+return bgr_color;`,
     run_script: true,
   },
   {
@@ -113,14 +110,13 @@ export const steps: TutorialStep[] = [
     text: "If you're ever stuck on something you can use debug and print statements in your script and they will be shown here. For rhai those are 'print()' and 'debug()'.",
     box: BoxPosition.Top,
     script: `
-    //
-    print("Hackclub!");
+print("Hackclub!");
 
-    if x > 1 {
-      print("Definetly useful message");
-    }
+if x > 1 {
+print("Definitely useful message");
+}
 
-    return [236, 55, 88];
+return [236, 55, 88];
     `,
     run_script: true,
   },

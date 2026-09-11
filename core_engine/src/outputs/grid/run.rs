@@ -1,7 +1,7 @@
 use super::rhai_handler;
 use super::types::{GridSettings, Pixel};
+use crate::languages::rhai_lang::{clear_engine, compile, create_engine};
 use crate::outputs::common::init_logging;
-use crate::outputs::grid::rhai_handler::{clear_engine, compile};
 use crate::outputs::grid::types::GridSuccessReturn;
 use crate::types::{ErrorOutput, LogMessage, ScriptType, WasmResponse};
 use log::error;
@@ -33,7 +33,7 @@ pub fn run_grid(
     let mut out_buf: Vec<Pixel> = Vec::with_capacity(num_pixels as usize);
     let logs_buf: Arc<Mutex<Vec<LogMessage>>> = Arc::new(Mutex::new(Vec::new()));
     let script_handler = rhai_handler::run_rhai;
-    let mut script_engine = rhai_handler::create_engine();
+    let mut script_engine = create_engine();
     let ast = match compile(&script, &script_engine) {
         Ok(a) => a,
         Err(err) => return WasmResponse::Error(err),
