@@ -4,6 +4,7 @@ import { execute } from "../../worker/executor";
 import { get_state } from "../../state";
 import { WorkerRequest } from "../../types";
 import { ErrorOutput } from "../../../../pkg/wasm/core_engine";
+import { GlueXYPair } from "../../../../pkg/wasm/core_engine";
 
 export const run = async (script: string): Promise<ErrorOutput | null> => {
   let output;
@@ -20,6 +21,6 @@ export const run = async (script: string): Promise<ErrorOutput | null> => {
   } finally {
     console.timeEnd("interpreting rhai script");
   }
-  full_draw(output as Uint8ClampedArray, settings);
+  full_draw(output as GlueXYPair[], settings);
   return null;
 };
