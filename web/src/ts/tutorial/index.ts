@@ -139,7 +139,9 @@ export const start_tutorial = () => {
   }
   tutorial_active = true;
   // store script
-  script_before = get_editor().getValue();
+  try {
+    script_before = get_editor().getValue();
+  } catch { }
 
   get_output().clear();
 
