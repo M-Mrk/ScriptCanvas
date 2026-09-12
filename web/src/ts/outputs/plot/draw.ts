@@ -3,10 +3,15 @@ import { get_element } from "../../common";
 
 import Chart from 'chart.js/auto';
 
+let last_chart: Chart;
 export const full_draw = (points: GlueXYPair[], settings: PlotSettings) => {
   console.time("drawing");
+  if (last_chart) {
+    last_chart.destroy();
+  }
+
   const canvas = get_element<HTMLCanvasElement>('#canvas-output');
-  new Chart(canvas, {
+  const chart = new Chart(canvas, {
     type: 'line',
     data: {
       datasets: [{
@@ -37,9 +42,13 @@ export const full_draw = (points: GlueXYPair[], settings: PlotSettings) => {
       }
     }
   });
+  last_chart = chart;
   console.timeEnd("drawing");
 };
 
 
 export const clear_output = () => {
+  if (last_chart) {
+    last_chart.clear();
+  }
 };

@@ -44,6 +44,9 @@ const init_selects = () => {
       }
       select.setAttribute("data-selected", new_value);
 
+      let input_event = new InputEvent('input', { bubbles: true, cancelable: true });
+      select.dispatchEvent(input_event);
+
       dropdown.classList.remove('open');
     });
   });

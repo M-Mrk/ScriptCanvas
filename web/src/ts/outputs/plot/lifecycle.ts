@@ -1,5 +1,6 @@
 import { PlotSettings } from "../../../../pkg/wasm/core_engine";
 import { get_element, html } from "../../common";
+import { clear_output } from "./draw";
 
 const settings_container = get_element<HTMLDivElement>('#output-toolbar');
 const output_inner = get_element<HTMLDivElement>('#output-inner');
@@ -26,7 +27,7 @@ const update_settings_from_page = () => {
 };
 
 export const plot_add_settings = () => {
-  const saved_settings = window.localStorage.getItem('grid-settings');
+  const saved_settings = window.localStorage.getItem('plot-settings');
   if (saved_settings) {
     settings = JSON.parse(saved_settings);
   }
@@ -34,15 +35,15 @@ export const plot_add_settings = () => {
   const settings_html = html`
     <label class="input-wrapper">
       <label class="number" data-tip="Sets the start value of x"> 
-        Start x
+        Start x:
         <input type="number" name="Start x value" value="${settings.start_x}" step="1" id="${id_start_x.slice(1)}">
       </label>
       <label class="number" data-tip="Sets the end value of x"> 
-        End x
+        End x:
         <input type="number" name="End x value" value="${settings.end_x}" step="1" id="${id_end_x.slice(1)}">
       </label>
       <label class="number" data-tip="Sets the step"> 
-        Step
+        Step:
         <input type="number" name="Step value" value="${settings.step_x}" step="1" id="${id_step.slice(1)}">
       </label>
     </label>
@@ -61,12 +62,16 @@ const add_output = () => {
 }
 
 export const init = () => {
+  plot_add_settings();
   add_output();
 };
 
 export const clear = () => {
+  clear_output();
 }
 
 export const deinit = () => {
   settings_container.removeEventListener('input', update_settings_from_page);
+  settings_container.innerHTML = "";
+  output_inner.innerHTML = "";
 };

@@ -128,4 +128,6 @@ export const clear = () => {
 export const deinit = () => {
   settings_container.removeEventListener('input', update_settings_from_page);
   obs.disconnect();
+  settings_container.innerHTML = "";
+  output_inner.innerHTML = "";
 };

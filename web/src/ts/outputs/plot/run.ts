@@ -21,6 +21,7 @@ export const run = async (script: string): Promise<ErrorOutput | null> => {
   } finally {
     console.timeEnd("interpreting rhai script");
   }
+  console.dirxml(output);
   full_draw(output as GlueXYPair[], settings);
   return null;
 };

@@ -1,3 +1,4 @@
+use log::debug;
 use std::sync::{Arc, Mutex};
 use wasm_bindgen::prelude::*;
 
@@ -19,7 +20,7 @@ pub fn run_plot(
 ) -> WasmResponse<PlotSuccessReturn> {
     init_logging();
 
-    let num_x_values: u32 = if settings.start_x >= settings.end_x {
+    let num_x_values: u32 = if settings.start_x <= settings.end_x {
         ((settings.end_x - settings.start_x) / settings.step_x).floor() as u32 + 1
     } else {
         ((settings.start_x - settings.end_x) / settings.step_x).floor() as u32 + 1
@@ -53,6 +54,7 @@ pub fn run_plot(
         }
     }
 
+    clear_engine(&mut script_engine);
     let logs = get_logs(logs_buf);
     WasmResponse::Ok(PlotSuccessReturn::new(points_buf, logs))
 }

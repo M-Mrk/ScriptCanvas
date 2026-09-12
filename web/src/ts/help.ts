@@ -55,7 +55,6 @@ const init_tip = () => {
   document.addEventListener('mouseover', (event) => {
     const target = event.target;
     if (!target || !(target instanceof HTMLElement)) {
-      console.debug("dropping because not an HTML Element");
       return;
     }
     let tip;
@@ -84,7 +83,6 @@ const click_handler = (event: PointerEvent) => {
   event.preventDefault();
   let target = event.target;
   if (!target || !(target instanceof HTMLElement)) {
-    console.debug("dropping because not an HTML Element");
     return;
   }
   let tip;
@@ -127,7 +125,6 @@ const generate_var_doc_element = (var_doc: VariableDoc): HTMLDivElement => {
 };
 
 const show_output_docs = () => {
-  console.debug("Showing docs")
   const output_docs = get_output().docs;
   get_element('#help-divider-output-name').innerText = output_docs.name;
   const output_section = get_element('#help-sect-output');
@@ -204,11 +201,9 @@ const show_docs = () => {
 const toggle_modal = () => {
   if (modal_box.classList.contains('shown')) {
     // remove listeners
-    console.debug("removing listeners");
     document.removeEventListener('click', click_handler);
   } else {
     // restore original state
-    console.debug("restoring modal");
     // modal_content.append(...initial_html);
     show_docs();
   }
@@ -243,7 +238,6 @@ const init_modal = () => {
 };
 
 const toggle_help_section = (divider_query: string, section_query: string) => {
-  console.debug("toggling section");
   const divider = get_element(divider_query);
   const section = get_element(section_query);
 

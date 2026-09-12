@@ -14,7 +14,7 @@ const docs: OutputDoc = {
   ],
 }
 
-export const grid: Output = {
+export const plot: Output = {
   pipeline: run,
   clear: clear,
   init: init,
