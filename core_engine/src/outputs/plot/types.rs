@@ -15,7 +15,13 @@ pub struct PlotSettings {
 pub type XYPair = (f32, f32);
 
 #[wasm_bindgen]
+pub struct GlueXYPair {
+    pub x: f32,
+    pub y: f32,
+}
+
 #[derive(Serialize, Clone)]
+#[wasm_bindgen]
 pub struct PlotSuccessReturn {
     points: Vec<XYPair>,
     logs: Vec<LogMessage>,
@@ -23,5 +29,25 @@ pub struct PlotSuccessReturn {
 impl PlotSuccessReturn {
     pub fn new(points: Vec<XYPair>, logs: Vec<LogMessage>) -> Self {
         Self { points, logs }
+    }
+}
+
+#[wasm_bindgen]
+impl PlotSuccessReturn {
+    #[wasm_bindgen(getter)]
+    pub fn logs(&self) -> Vec<LogMessage> {
+        self.logs.clone()
+    }
+
+    #[wasm_bindgen(getter)]
+    pub fn points(&self) -> Vec<GlueXYPair> {
+        let mut out = Vec::with_capacity(self.points.len());
+        for pair in self.points.clone() {
+            out.push(GlueXYPair {
+                x: pair.0,
+                y: pair.1,
+            });
+        }
+        out
     }
 }

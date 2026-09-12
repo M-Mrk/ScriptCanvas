@@ -1,4 +1,4 @@
-import { ErrorOutput, GridSettings, LogMessage } from "../../pkg/wasm/core_engine";
+import { ErrorOutput, GlueXYPair, GridSettings, LogMessage, PlotSettings } from "../../pkg/wasm/core_engine";
 
 export interface AppState {
   output_type: OutputType,
@@ -9,6 +9,7 @@ export interface AppState {
 
 export const OutputType = {
   GRID: "grid",
+  PLOT: "plot",
 } as const;
 export type OutputType = typeof OutputType[keyof typeof OutputType];
 
@@ -43,8 +44,8 @@ export interface Output {
   docs: OutputDoc,
 };
 
-export type OutputSetting = GridSettings; // Add new settings here
-export type OutputOutputs = Uint8ClampedArray; // Add new outputs here
+export type OutputSetting = GridSettings | PlotSettings; // Add new settings here
+export type OutputOutputs = Uint8ClampedArray | GlueXYPair[] // Add new outputs here
 
 export interface WorkerRequest {
   script: string,

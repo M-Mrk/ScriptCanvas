@@ -1,6 +1,7 @@
 /// <reference lib="webworker" />
 
-import init, { run_grid, ScriptType, ErrorOutput, WasmResponse } from "../../../pkg/wasm/core_engine";
+import init, { run_grid, run_plot, ScriptType, ErrorOutput, WasmResponse, PlotSettings, GridSettings } from "../../../pkg/wasm/core_engine";
+import { PlotSuccessReturn } from "../../../pkg/wasm/core_engine";
 import { GridSuccessReturn } from "../../../pkg/wasm/core_engine";
 import { WorkerRequest, WorkerResponse, WorkerStatus, OutputType, Language, OutputOutputs } from "../types";
 
@@ -25,7 +26,7 @@ self.onmessage = async (event) => {
   try {
     switch (req.state.output_type) {
       case OutputType.GRID:
-        const wasm_response = run_grid(req.script, lang, req.config);
+        const wasm_response = run_grid(req.script, lang, req.config as GridSettings);
         if ("Ok" in wasm_response) {
           const grid_ok: GridSuccessReturn = wasm_response.Ok;
           const response: WorkerResponse = {
@@ -38,6 +39,24 @@ self.onmessage = async (event) => {
           return;
         }
         wasm_err = wasm_response.Error
+        break
+
+      case OutputType.PLOT:
+        {
+          const wasm_response = run_plot(req.script, lang, req.config as PlotSettings);
+          if ("Ok" in wasm_response) {
+            const grid_ok: PlotSuccessReturn = wasm_response.Ok;
+            const response: WorkerResponse = {
+              status: WorkerStatus.SUCCESS,
+              data: grid_ok.points,
+              logs: grid_ok.logs,
+              id: req.id as string,
+            }
+            self.postMessage(response);
+            return;
+          }
+          wasm_err = wasm_response.Error
+        }
         break
 
       default:
