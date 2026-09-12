@@ -1,4 +1,7 @@
-use std::sync::Once;
+use log::error;
+use std::sync::{Arc, Mutex, Once};
+
+use crate::types::LogMessage;
 
 static INIT_LOGGER: Once = Once::new();
 pub fn init_logging() {
@@ -8,6 +11,16 @@ pub fn init_logging() {
     });
 }
 
-pub fn rand(min: i64, max: i64) -> i64 {
-    rand::random_range(min..=max)
+pub fn get_logs(logs_buf: Arc<Mutex<Vec<LogMessage>>>) -> Vec<LogMessage> {
+    let un_arc = Arc::try_unwrap(logs_buf);
+    if un_arc.is_err() {
+        error!("Failed to unwrap log buffer at arc");
+        return Vec::new();
+    }
+    let un_mutex = un_arc.unwrap().into_inner();
+    if un_mutex.is_err() {
+        error!("Failed to unwrap log buffer at mutex");
+        return Vec::new();
+    }
+    un_mutex.unwrap()
 }
