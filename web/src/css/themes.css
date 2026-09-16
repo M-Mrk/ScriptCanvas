@@ -4,6 +4,9 @@
   --bg-2: color-mix(in oklch, var(--bg-0) 90%, white);
   --bg-3: color-mix(in oklch, var(--bg-0) 85%, white);
 
+  --output-bg: color-mix(in oklch, var(--bg-0) 60%, white);
+  --output-txt: color-mix(in oklch, var(--bg-0) 50%, white);
+
   --input: #71f2cf;
   --input-hover: color-mix(in oklch, var(--input) 70%, black);
   --input-disabled: color-mix(in oklch, white 50%, black);
