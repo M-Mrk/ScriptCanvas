@@ -110,7 +110,7 @@ export const grid_add_settings = () => {
 const obs = new ResizeObserver(show_last_draw);
 const add_output = () => {
   const canvas_html = html`
-    <canvas id="canvas-output"></canvas>
+    <canvas id="canvas-output" class="grid-canvas"></canvas>
   `
   output_inner.innerHTML = canvas_html;
   obs.observe(document.documentElement);

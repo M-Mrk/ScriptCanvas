@@ -165,7 +165,8 @@ input[type="number"] {
   border: none;
   background-color: transparent;
   margin: 0;
-  width: 3ch;
+  min-width: 2ch;
+  max-width: 6ch;
   height: auto;
   user-select: none;
 
@@ -371,4 +372,9 @@ input[type="number"]:focus {
 .editor-error-line {
   background-color: var(--editor-error-highlight);
   width: 100% !important;
+}
+
+
+.grid-canvas {
+  background-color: var(--output-bg);
 }

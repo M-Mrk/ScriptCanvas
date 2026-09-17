@@ -6,6 +6,15 @@ use super::common::rand;
 use crate::types::ErrorOutput;
 use crate::types::Position as CPosition;
 
+// AI generated macro
+macro_rules! overload_math_for_i64 {
+    ($engine:expr, $($func:ident),*) => {
+        $(
+            $engine.register_fn(stringify!($func), |x: i64| (x as f64).$func());
+        )*
+    };
+}
+
 pub fn create_engine() -> Engine {
     let mut engine = Engine::new();
     engine.register_fn("rand", rand);
@@ -15,6 +24,11 @@ pub fn create_engine() -> Engine {
 
     let math = BasicMathPackage::new();
     math.register_into_engine(&mut engine);
+
+    // Overload functions to also make them work with i64s
+    overload_math_for_i64!(
+        engine, sin, cos, tan, sinh, cosh, tanh, asin, acos, atan, sqrt, cbrt, exp, ln, log10
+    );
 
     engine
 }

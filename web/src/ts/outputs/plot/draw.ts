@@ -69,7 +69,7 @@ export const full_draw = (points: GlueXYPair[], settings: PlotSettings) => {
           callbacks: {
             label: function(context) {
               const y_val = context.parsed.y;
-              return `Y: ${y_val?.toPrecision(3)}`;
+              return `Y: ${y_val?.toPrecision(4)}`;
             },
             title: function(context) {
               const x_ctx = context[0];
@@ -77,7 +77,7 @@ export const full_draw = (points: GlueXYPair[], settings: PlotSettings) => {
                 return "error";
               }
               const x_val = x_ctx.parsed.x;
-              return `X: ${x_val?.toPrecision(3)}`;
+              return `X: ${x_val?.toPrecision(4)}`;
             }
           }
         }
