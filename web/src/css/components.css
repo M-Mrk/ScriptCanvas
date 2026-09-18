@@ -373,8 +373,3 @@ input[type="number"]:focus {
   background-color: var(--editor-error-highlight);
   width: 100% !important;
 }
-
-
-.grid-canvas {
-  background-color: var(--output-bg);
-}

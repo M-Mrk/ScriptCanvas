@@ -16,7 +16,7 @@ export interface TutorialStep {
 export const steps: TutorialStep[] = [
   {
     target: "#tutorial-box",
-    text: `Hi! Welcome to PixelMatrix. An app made for experimenting with logic and using unique output types. 
+    text: `Hi! Welcome to ScriptCanvas. An app made for experimenting with logic and using unique output types. 
     The core idea is to run a script multiple times with different inputs to create an output. It's inspired by the game replicube.
 
     Let's go over the basics so you can create an output.`,

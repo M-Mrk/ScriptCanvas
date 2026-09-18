@@ -5,7 +5,7 @@ import { run } from "./run";
 
 const docs: OutputDoc = {
   name: 'Plot',
-  summary: `Plot an x value to a y value using the script`,
+  summary: `Plot an x value to a y value`,
   variables: [
     {
       name: "x",

@@ -38,6 +38,18 @@ body {
   --bg-color: var(--bg-0);
 }
 
+.title {
+  text-decoration: none;
+  font-weight: bold;
+  color: inherit;
+  padding: var(--space-xs);
+  transition: background var(--transition-fast);
+}
+
+.title:hover {
+  background-color: var(--bg-2);
+}
+
 .top-interactives {
   display: flex;
   flex-direction: row;
