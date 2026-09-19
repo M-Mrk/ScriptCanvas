@@ -51,15 +51,14 @@ export const init_editor = () => {
   let last_script = window.localStorage.getItem("script");
   if (!last_script) {
     last_script = [
-      '// Write your Rhai script here',
-      '// It will run on every pixel and the return will define the pixels color',
-      '// Return an array of RGB values, e.g. [ 255, 125, 50 ]',
+      '// Welcome to ScriptCanvas!',
+      '// This is the editor where you will write your scripts.',
+      '// That script will then be run a bunch of times.',
+      '// Depending on your Output you have access to some context variables',
+      '// like for Grid you have access to x and y the coordinates of the pixel.',
       '//',
-      '// You also have access to the current pixels coordinates: x, y',
+      '// Use any built-in rhai function, aswell as those from the Math and Sci package!',
       '//',
-      '// Use any built-in rhai function and some extra ones, like:',
-      '// rand(min: i64, max: i64) -> i64 Returns a random number in the given range',
-      'return [ x*10, x*y, y*10 ];',
     ].join('\n');
   }
 
