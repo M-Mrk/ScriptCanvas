@@ -17,11 +17,11 @@ const docs: OutputDoc = {
     },
     {
       name: "res_x",
-      doc: "Directly maps to the X resolution/width set"
+      doc: "Directly maps to the set X resolution/width"
     },
     {
       name: "res_y",
-      doc: "Directly maps to the Y resolution/height set"
+      doc: "Directly maps to the set Y resolution/height"
     }
   ],
 }

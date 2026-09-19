@@ -24,14 +24,14 @@ export const steps: TutorialStep[] = [
   },
   {
     target: "#tutorial-box",
-    text: `The default output is Grid, meaning that the script is run over a grid of pixels and it returns the RGB value of that Pixel. The script has access to the pixels x and y coordinates, aswell as the resolution.
+    text: `The default output is Grid, meaning that the script is run over a grid of pixels and it returns the RGB value of that pixel. The script has access to the pixels x and y coordinates, as well as the resolution.
 
     So a script just returning "[255, 255, 255]" would result in a white grid`,
     box: BoxPosition.Center,
   },
   {
     target: "#in-out-container",
-    text: `So lets try that now with this simple script. By default the script uses the Rhai language, a scripting language with syntax similar to JavaScript and Rust.
+    text: `So let's try that now with this simple script. By default the script uses the Rhai language, a scripting language with syntax similar to JavaScript and Rust.
     It returns "[236, 55, 80]" on every pixel, meaning every pixel is set to that color.`,
     box: BoxPosition.Right,
     script: `
@@ -47,12 +47,12 @@ return [236, 55, 80]`,
   {
     target: "#in-out-container",
     text: `
-    So lets add something important. Let us use the pixels coordinates in relation to the output!
+    So let's add something important. Let us use the pixels coordinates in relation to the output!
 
-    This script runs seperatly for each pixel, so 'x' and 'y' have different values on each pixel.
+    This script runs separately for each pixel, so 'x' and 'y' have different values on each pixel.
     It takes the same color as before but adds more green along the x-axis and more blue along the y-axis.
     We also multiply this change by 2 to make it more noticeable.
-    Also because this is a real programming language we can also use variables and functions to help us.
+    Also, because this is a real programming language we can also use variables and functions to help us.
     `,
     box: BoxPosition.Top,
     script: `
@@ -66,7 +66,7 @@ return [r, g, b];
   {
     target: "#in-out-container",
     text: `
-    We can also use logic to draw something. By using logic statements this script can draw a white h on a background.
+    We can also use logic to draw something. By using logic statements this script can draw a white 'h' on a background.
     Don't worry if this script is a bit too complex, it is only to showcase how conditions can be used to create something.
     `,
     box: BoxPosition.Top,
@@ -96,7 +96,7 @@ if (x in 10..23) && (y in 13..18) {
 return h_color;
 }
 
-// fill remaingin pixels with background color
+// fill remaining pixel's with background color
 return bgr_color;`,
     run_script: true,
   },
@@ -107,7 +107,7 @@ return bgr_color;`,
   },
   {
     target: "#console",
-    text: "If you're ever stuck on something you can use debug and print statements in your script and they will be shown here. For rhai those are 'print()' and 'debug()'.",
+    text: "If you're ever stuck on something you can use debug and print statements in your script and they will be shown here. For Rhai those are 'print()' and 'debug()'.",
     box: BoxPosition.Top,
     script: `
 print("Hackclub!");
@@ -133,7 +133,7 @@ return [236, 55, 88];
   },
   {
     target: ".workspace",
-    text: "Thats all for now! Now go ahead and write some logic and see how it results into an image. Also check out some patterns you can create with simple logic and try to recreate a logo or picture with this.",
+    text: "That's all for now! Now go ahead and write some logic and see how it results in an image. Also check out some patterns you can create with simple logic and try to recreate a logo or picture with this.",
     box: BoxPosition.Center,
   }
 ]
